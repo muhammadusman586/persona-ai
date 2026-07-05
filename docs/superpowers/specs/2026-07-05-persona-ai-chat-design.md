@@ -146,7 +146,7 @@ All routes: `auth()` → `userId`, then `lib/db` scoped by `userId`.
 - **Manual smoke**: sign in → new Hitesh chat → send → reply persists → refresh keeps it →
   new Piyush chat → switch between conversations.
 - **Deploy**: Vercel. Env vars: `OPENAI_API_KEY`, Clerk publishable + secret keys,
-  `NEXT_PUBLIC_SUPABASE_URL`, Supabase service-role key. Schema via committed SQL migration.
+  `SUPABASE_URL` + `SUPABASE_SERVICE_ROLE_KEY` (both server-only under Approach B). Schema via committed SQL migration.
 - **Docs deliverables**: persona data collection & prep; prompt strategy; context management;
   sample conversations (both personas); README setup/run instructions.
 
