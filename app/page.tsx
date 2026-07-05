@@ -1,19 +1,36 @@
-import { Button } from "@/components/ui/button"
+import Link from "next/link";
+import { SignInButton, SignUpButton } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
+import { Button } from "@/components/ui/button";
 
-export default function Page() {
+export default async function Home() {
+  const { isAuthenticated } = await auth();
+
   return (
-    <div className="flex min-h-svh p-6">
-      <div className="flex max-w-md min-w-0 flex-col gap-4 text-sm leading-loose">
-        <div>
-          <h1 className="font-medium">Project ready!</h1>
-          <p>You may now add components and start building.</p>
-          <p>We&apos;ve already added the button component for you.</p>
-          <Button className="mt-2">Button</Button>
-        </div>
-        <div className="font-mono text-xs text-muted-foreground">
-          (Press <kbd>d</kbd> to toggle dark mode)
-        </div>
+    <main className="flex min-h-svh flex-col items-center justify-center gap-8 p-8 text-center">
+      <div className="space-y-3">
+        <h1 className="text-4xl font-bold">Persona AI</h1>
+        <p className="max-w-xl text-muted-foreground">
+          Chat with AI versions of Hitesh Choudhary and Piyush Garg. Learn to code in
+          their own voice and teaching style.
+        </p>
       </div>
-    </div>
-  )
+      <div className="flex gap-3">
+        {isAuthenticated ? (
+          <Button asChild>
+            <Link href="/chat">Go to chat →</Link>
+          </Button>
+        ) : (
+          <>
+            <SignInButton mode="modal">
+              <Button>Sign in</Button>
+            </SignInButton>
+            <SignUpButton mode="modal">
+              <Button variant="secondary">Sign up</Button>
+            </SignUpButton>
+          </>
+        )}
+      </div>
+    </main>
+  );
 }
