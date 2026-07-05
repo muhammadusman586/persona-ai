@@ -2,7 +2,7 @@
 
 Chat with AI versions of two well-known Indian coding educators — **Hitesh Choudhary** and **Piyush Garg**. Each persona replies in its own voice, teaching style, and personality, and every conversation is saved to your account.
 
-> **Live demo:** _add your Vercel URL here after deploying_
+> **Live demo:** https://persona-ai-five-flax.vercel.app/
 
 ## Features
 
