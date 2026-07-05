@@ -8,7 +8,9 @@ describe("generateReply", () => {
   ];
 
   it("puts the persona system prompt first and passes the history", async () => {
-    const createCompletion = vi.fn(async (_messages: ChatMessage[]) => "reply text");
+    const createCompletion = vi.fn<(messages: ChatMessage[]) => Promise<string>>(
+      async () => "reply text",
+    );
     const reply = await generateReply(
       { personaId: "hitesh", history },
       { createCompletion },

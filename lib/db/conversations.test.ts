@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any -- structural fake of the
+   Supabase query builder; `any` keeps the chainable test double concise. */
 import { describe, it, expect, vi } from "vitest";
 import {
   listConversations,
