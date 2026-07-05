@@ -1,5 +1,11 @@
 import { describe, it, expect, vi } from "vitest";
-import { listConversations, createConversation } from "@/lib/db/conversations";
+import {
+  listConversations,
+  createConversation,
+  getConversation,
+  deleteConversation,
+  touchConversation,
+} from "@/lib/db/conversations";
 
 function fakeDb(returnData: unknown) {
   const filters: Record<string, unknown> = {};
@@ -45,5 +51,37 @@ describe("createConversation", () => {
       expect.objectContaining({ user_id: "user_1", persona: "piyush", title: "Hello" }),
     );
     expect(result).toEqual(row);
+  });
+});
+
+describe("getConversation", () => {
+  it("scopes the lookup to the given user id and conversation id", async () => {
+    const row = { id: "c1", user_id: "user_1", persona: "hitesh" };
+    const db = fakeDb(row);
+    const result = await getConversation("user_1", "c1", db as any);
+    expect(db.from).toHaveBeenCalledWith("conversations");
+    expect(db._filters.user_id).toBe("user_1");
+    expect(db._filters.id).toBe("c1");
+    expect(result).toEqual(row);
+  });
+});
+
+describe("deleteConversation", () => {
+  it("scopes the delete to the given user id and conversation id", async () => {
+    const db = fakeDb(null);
+    await deleteConversation("user_1", "c1", db as any);
+    expect(db._builder.delete).toHaveBeenCalled();
+    expect(db._filters.user_id).toBe("user_1");
+    expect(db._filters.id).toBe("c1");
+  });
+});
+
+describe("touchConversation", () => {
+  it("scopes the update to the given user id and conversation id", async () => {
+    const db = fakeDb(null);
+    await touchConversation("user_1", "c1", db as any);
+    expect(db._builder.update).toHaveBeenCalled();
+    expect(db._filters.user_id).toBe("user_1");
+    expect(db._filters.id).toBe("c1");
   });
 });
