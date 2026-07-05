@@ -39,10 +39,20 @@ export async function POST(
   const userMessage = await addMessage(id, "user", content);
 
   const history = await listMessages(id);
-  const replyText = await generateReply({
-    personaId: conversation.persona,
-    history: history.map((m) => ({ role: m.role, content: m.content })),
-  });
+
+  let replyText: string;
+  try {
+    replyText = await generateReply({
+      personaId: conversation.persona,
+      history: history.map((m) => ({ role: m.role, content: m.content })),
+    });
+  } catch (err) {
+    console.error("generateReply failed:", err);
+    return NextResponse.json(
+      { error: "Failed to generate a reply. Please try again." },
+      { status: 502 },
+    );
+  }
 
   const assistantMessage = await addMessage(id, "assistant", replyText);
   await touchConversation(userId, id);

@@ -28,6 +28,7 @@ export function ChatView({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ content: text }),
       });
+      if (!res.ok) throw new Error(`Request failed with status ${res.status}`);
       const data = await res.json();
       setMessages((prev) => [
         ...prev.filter((m) => m.id !== optimistic.id),
