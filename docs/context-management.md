@@ -26,7 +26,7 @@ On every user message, the API route (`app/api/conversations/[id]/messages/route
 - **Coherence** — 16 messages (~8 exchanges) is enough for the model to follow multi-step conversations (see the multi-turn example in [sample-conversations.md](./sample-conversations.md), where "what next?" and "how long?" correctly build on earlier answers).
 - **Bounded cost/latency** — old turns beyond the window are dropped, so token usage doesn't grow unbounded as a conversation gets very long.
 
-`buildContext` is unit-tested (`lib/ai/build-context.test.ts`) to confirm it caps at the window size, keeps the most recent messages, and preserves order.
+`buildContext` (`lib/ai/build-context.ts`) caps the history at the window size, keeps the most recent messages, and preserves chronological order.
 
 ## Ownership & isolation
 

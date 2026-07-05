@@ -4,19 +4,15 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { PERSONAS, type PersonaId } from "@/lib/ai/personas";
 import { Button } from "@/components/ui/button";
+import { createConversationRequest } from "@/lib/chat-actions";
 import type { Conversation } from "@/lib/db/types";
 
 export function Sidebar({ conversations }: { conversations: Conversation[] }) {
   const router = useRouter();
 
   async function newChat(persona: PersonaId) {
-    const res = await fetch("/api/conversations", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ persona }),
-    });
-    const conversation = await res.json();
-    router.push(`/chat/${conversation.id}`);
+    const id = await createConversationRequest(persona);
+    router.push(`/chat/${id}`);
     router.refresh();
   }
 

@@ -14,7 +14,7 @@ Chat with AI versions of two well-known Indian coding educators — **Hitesh Cho
 
 ## Tech stack
 
-Next.js 16 (App Router) · React 19 · TypeScript · Tailwind v4 · shadcn/ui · OpenAI `gpt-4o` · Clerk (auth) · Supabase (Postgres) · Vitest · deploy on Vercel.
+Next.js 16 (App Router) · React 19 · TypeScript · Tailwind v4 · shadcn/ui · OpenAI `gpt-4o` · Clerk (auth) · Supabase (Postgres) · deploy on Vercel.
 
 ## Architecture (Approach B)
 
@@ -64,7 +64,6 @@ Apply the database schema — open the Supabase dashboard → **SQL Editor**, pa
 
 ```bash
 pnpm dev        # start the dev server at http://localhost:3000
-pnpm test       # run the unit test suite (Vitest)
 pnpm typecheck  # tsc --noEmit
 pnpm lint       # eslint
 pnpm build      # production build

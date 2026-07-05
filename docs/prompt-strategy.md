@@ -47,4 +47,4 @@ Each persona ships 4 hand-written Q&A pairs (`persona.fewShot`). They are embedd
 
 ## Validation
 
-`buildSystemPrompt` is unit-tested (`lib/ai/build-system-prompt.test.ts`) to confirm the assembled prompt contains the persona's identity, voice rules, guardrails, and few-shot turns. The real-world output fidelity is shown in [sample-conversations.md](./sample-conversations.md).
+`buildSystemPrompt` (`lib/ai/build-system-prompt.ts`) assembles the persona's identity, voice rules, guardrails, and few-shot turns into the system prompt. The real-world output fidelity is shown in [sample-conversations.md](./sample-conversations.md).
