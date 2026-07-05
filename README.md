@@ -92,15 +92,3 @@ supabase/migrations/           SQL schema
 docs/                          assignment documentation
 ```
 
-## Deployment (Vercel)
-
-1. Push to a public GitHub repo.
-2. Import the repo into Vercel.
-3. Add all the env vars from `.env.example` (with real values) in the Vercel project settings.
-4. Add your Vercel domain to the Clerk dashboard (allowed origins / production instance).
-5. Deploy, then put the live URL at the top of this README.
-
-## Notes
-
-- **Row-Level Security** is not enabled in v1; access is enforced in the server data-access layer (Approach B). Enabling RLS with Clerk-issued JWTs is a documented future hardening step.
-- Responses are non-streaming — the full reply is returned once and then persisted.
